@@ -7,19 +7,15 @@ class Node{
     Node *next;
 };
 
-void insertionAtStart(Node* ptr, Node* add){
+Node* insertionAtStart(Node* ptr, Node* add){
     add->next = ptr;
+    return add;
 }
 void insertAfter(Node* ptr, Node* add, Node* element){
-    while(ptr->next != NULL){
-        ptr = ptr->next;
-        if(ptr == element){
-           add->next =  ptr->next;
-           ptr->next = add;
-           cout << "Element added after" << ptr;
-           return;
-        }
-    }
+
+     add->next =  element->next;
+     element->next = add;
+      cout << "Element added after" << ptr->data;
 }
 void insertionInLinkedListAtEnd(Node* ptr, Node* add){
     while(ptr != NULL){
@@ -49,6 +45,62 @@ void linkedListTraversal(Node* ptr)
         ptr = ptr->next;
     };
 }
+void insertAtIndex(Node* ptr, Node* element,int index){
+    int i = 0;
+    while(i != index-1){
+        ptr = ptr->next;
+        i++;
+    }
+    element->next = ptr->next;
+    ptr->next = element;
+
+}
+Node* deletionFirstNode(Node* ptr){
+  Node* head = ptr->next;
+  free(ptr);
+  cout << "after deletion \n"; 
+  return head;
+}
+void deleteAtIndex(Node* ptr, int index){
+    cout << "Enter index";
+    cin >> index;
+    int i = 0;
+    while(i != index-2){
+        ptr = ptr->next;
+        i++; 
+    };
+    Node* El = ptr;
+    ptr = ptr->next;
+    El->next = ptr->next;
+    free(ptr);  
+}
+void deletingLastNode(Node* ptr){
+    Node* temp = ptr;
+    ptr = ptr->next;
+    while(ptr->next != NULL){
+        temp = ptr;
+        ptr = ptr->next;
+    }
+    temp->next = NULL;
+    free(ptr);
+}
+void deletingValueInList(Node* ptr, int value){
+    cout << "Enter data value";
+    cin >> value;
+    Node* temp = ptr->next;
+    while(temp->next != NULL && temp->data != value){
+        ptr = ptr->next;
+        temp = temp->next;
+    }
+    if(temp->data == value){
+        ptr->next = temp->next;
+        free(temp);
+        return;
+    }
+    cout << "Not found in list \n";
+
+}
+
 int main(){
     
     Node* head = new Node();
@@ -92,15 +144,29 @@ int main(){
     addParticularBefore->data = 10;
     addParticularBefore->next = NULL;
 
+    // to add between a index
+    Node* addBetween = new Node();
+    addBetween->data = 30;
+    addBetween->next = NULL;
 
-    linkedListTraversal(head); // traversal
-    insertionInLinkedListAtEnd(head, addLast); // at end
+    // linkedListTraversal(head); // traversal
+    // insertionInLinkedListAtEnd(head, addLast); // at end
+    // // linkedListTraversal(head);
+    // head = insertionAtStart(head, addStart); // at start
+    // linkedListTraversal(head);
+    // insertAfter(head, addParticular, second); // insert after specific node
+    // linkedListTraversal(head);
+    // insertBefore(head, addParticularBefore, second); // insert before specific node
+    // linkedListTraversal(head);
+    // insertAtIndex(head, addBetween, 6);  // insert between two elements
+    // linkedListTraversal(head);
+    // head = deletionFirstNode(head); // deletion first element
+    // linkedListTraversal(head);
+    // deleteAtIndex(head, 2); // delete at specific index
+    // linkedListTraversal(head);
+    // deletingLastNode(head); // delete last node
+    // linkedListTraversal(head);
+    deletingValueInList(head, 17); // delete a specific data from list
     linkedListTraversal(head);
-    insertionAtStart(head, addStart); // at start
-    linkedListTraversal(addStart);
-    insertAfter(addStart, addParticular, second); // insert after specific node
-    linkedListTraversal(addStart);
-    insertBefore(addStart, addParticularBefore, second); // insert before specific node
-    linkedListTraversal(addStart);
     return 0;
 }
