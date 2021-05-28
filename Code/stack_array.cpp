@@ -34,14 +34,22 @@ using namespace std;
   }
   int peek(int index)
   {
+    // start from bottom of stack
     // if(index < maxSize){
     // return arr[index];
     // }
+    
+    //start from top of stack
+    // if (index <= maxSize)
+    // {
+    //   int newIndex = maxSize - index;
+    //   return arr[newIndex];
+    // }
 
-    if (index <= maxSize)
-    {
-      int newIndex = maxSize - index;
-      return arr[newIndex];
+    // on runtime position
+    if(index <= maxSize){
+      int newInd = top - index + 1 ;
+      return arr[newInd];
     }
     
     cout << "Index not available \n";
