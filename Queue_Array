@@ -1,0 +1,89 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+ int head, mazSize = 5, crPos=0;  int arr[5];
+using namespace std;
+bool isEmpty(){
+    if(head == -1){
+        crPos--; head --;
+        return true;
+    } 
+    return false;
+}
+
+bool isOverflow(){
+    if(crPos+1 == mazSize){
+        return true;
+    }
+    return false;
+}
+int pop(){
+    if(!isEmpty()){
+        return arr[0];
+    }
+    cout << "empty \n" ;
+}
+void shiftR(){
+    for(int i=0; i<= crPos; i++){
+        arr[i-1] = arr[i];
+    }
+}
+int push(int el){
+    if(!isOverflow()){
+        arr[crPos] = el;
+        crPos++ ; head++
+    }
+    cout << "full \n";
+}
+
+
+
+void stackTraversal(){
+     for(int i=0; i<= mazSize; i++){
+        cout << "el at : " << i << "  is " << arr[i] <<endl;
+    }
+}
+int main()
+{
+   int operation;
+  
+    cout<<"Hello World";
+      cout << "Chooose operation \n 1. push \n 2. pop \n 3. peek \n 4. stack traversal \n 5. end operation \n ";
+  cin >> operation;
+  switch (operation)
+  {
+  case 1:
+  int element;
+  cout << "Element to push \n";
+  cin >> element;
+  push(element);
+    break;
+  case 2:
+  int popedVal;
+  popedVal = pop();
+  shiftR();
+  cout << "Element popped out  " << popedVal << '\n';
+  break;
+//   case 3:
+//   int index;
+//   cout << "Select index to peek , Please type a number between 1 to 5\n";
+//   cin >> index;
+//   element = peek(index);
+//   cout << "Element at index " << index << "\n" << element << "\n";
+//   break;
+  case 4:
+  stackTraversal();
+  case 5:
+  return 0;
+  default:
+    break;
+  }
+  main();
+    return 0;
+}
