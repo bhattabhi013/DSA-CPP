@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+
+class Node{
+    public:
+    Node(int data){
+        val = data;
+        right = NULL;
+        left = NULL;
+    }
+    int val;
+    Node* right;
+    Node* left;
+};
+Node* createRoot(int data){
+    Node* newNode = new Node(data);
+
+    return newNode;
+}
+Node* insert(Node* root, int data){
+    if(!root) return createRoot(data);
+    else if(root->val <= data){
+        root->left = insert(root->left,data);
+    }else{
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
+void traversal(Node*  root){
+    if(root){
+        traversal(root->left);
+        cout << root->val  <<endl;
+        traversal(root->right);
+    }
+}
+int main(){
+    Node* root =NULL;
+    root = insert(root, 10);
+    root = insert(root, 12);
+    root = insert(root, 5);
+    root = insert(root, 20);
+    root = insert(root, 24);
+    root = insert(root, 16);
+    root = insert(root, 18);
+    traversal(root);
+    return 0;
+}
